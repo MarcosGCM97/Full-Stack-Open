@@ -1,0 +1,12 @@
+A- El Usuario escribe en el Input 'text' la nota.
+B- El Usuario al apretar el Input 'submit' envia la nota en cuestion al servidor.
+C- La primer solicitud que envia el form es una solicitud 'HTTP POST' al Servidor 'new-note'
+a travez de la etiqueta 'action' en el Input
+D- El Servidor responde con un codigo de estado 'HTTP 302' que significa una redireccion de URL
+E- Luego el Servidor realiza una nueva solicitud 'HTTP GET' a la ubicacion 'notes'
+F- Esta nota junto con la fecha y hora en la que se envia se envian en formato Json como cuerpo de la solicitud 'HTTP POST'
+los cuales se ingresan como un objeto en el array 'notes'
+G- El navegador se recarga generando las 3 solicitudes HTTP bases de la pagina
+que incluyen la hoja de estilo, el codigo JS y lan notas con las fechas en el archivo Json
+y mostrando la nueva nota agregada
+
