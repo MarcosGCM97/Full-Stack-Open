@@ -1,0 +1,110 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import {useState, useEffect} from 'react'
+
+const App =()=>{
+  const [voto, setVoto] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0
+  })
+  const [votes, setVotes] = useState(0)
+  const [positive, setPositive] = useState(0)
+  const [average, setAverage] = useState(0)
+  let good = voto.good
+  let neutral = voto.neutral
+  let bad = voto.bad
+  
+  useEffect(()=>{
+    const allVotes = good + neutral + bad
+    const allPositive =(good * 100) / allVotes
+    const allAverage =(good * 2 + neutral * 1 + bad * 0) / allVotes
+
+    setVotes(allVotes)
+    setPositive(allPositive)
+    setAverage(allAverage)
+  },[good,neutral,bad])
+
+  const addGood =()=>{
+    setVoto({...voto, good: good + 1})
+  }
+  const addNeutral =()=>{
+    setVoto({...voto, neutral: neutral + 1});
+  }
+  const addBad =()=>{
+    setVoto({...voto, bad: bad + 1});
+  }
+  return (
+    <>
+      <h1>give feedback</h1>
+      <table>
+        <thead>
+          <tr>
+            <td><Button onClick={addGood} name={'good'} /></td>
+            <td><Button onClick={addNeutral} name={'neutral'} /></td>
+            <td><Button onClick={addBad} name={'bad'} /></td>
+          </tr> 
+        </thead>
+      </table>
+      <h2>statistics</h2>
+      <table>
+        <tfoot>  
+          <tr>
+            <StatisticsLine name={'good'}/>
+            <StatisticsLine num={good}/>
+          </tr>
+          <tr>
+            <StatisticsLine name={'neutral'}/>
+            <StatisticsLine num={neutral}/>
+          </tr>  
+          <tr>
+            <StatisticsLine name={'bad'}/>
+            <StatisticsLine num={bad}/>
+          </tr> 
+            <Statistics 
+                votes={votes} 
+                positive={positive} 
+                average={average} />
+        </tfoot>
+    </table>
+    </>
+  )
+}
+
+const Statistics =({votes,average,positive})=>{
+  
+  if(votes === 0){
+    return  <tr>
+              <StatisticsLine name={'No feddback given'}/>
+            </tr>
+  }
+  
+  return <>
+    <tr>
+      <StatisticsLine name={'all'}/>
+      <StatisticsLine num={votes}/>
+    </tr> 
+    <tr>
+      <StatisticsLine name={'average'}/>
+      <StatisticsLine num={average}/>
+    </tr> 
+    <tr>
+      <StatisticsLine name={'positive'}/>
+      <StatisticsLine num={positive + '%'}/>
+    </tr> 
+  </>
+}
+
+const Button =({onClick, name})=>{
+
+  return <button onClick={onClick}>{name}</button>
+
+}
+const StatisticsLine =({name, num})=>{
+  return <td>{name} {num}</td>
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <App />
+);
