@@ -1,0 +1,19 @@
+.messageAdd{
+    display: inline;
+    color: rgb(6, 39, 6);
+    border: 5px solid rgb(6, 54, 6);
+    background-color: rgba(73, 224, 73, 0.788);
+    border-radius: 10px;
+    width: auto;
+    position: relative;
+}
+.messageError{
+    display: inline;
+    color: rgb(39, 6, 6);
+    border: 5px solid rgb(54, 6, 6);
+    background-color: rgba(224, 73, 73, 0.788);
+    border-radius: 10px;
+    width: auto;
+    position: relative;
+    margin: 0 0 20px 0;
+}
